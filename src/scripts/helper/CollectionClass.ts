@@ -28,6 +28,21 @@ export default class Collection {
     }
   }
 
+  @action addFirst = (newModel) => {
+    if (Array.isArray(newModel)) {
+      newModel.forEach(item => this.add(item));
+      return;
+    }
+    if (newModel instanceof this.model) {
+      newModel.parent = this;
+      this.all.unshift(newModel)
+    } else {
+      const newModelInstance = new this.model(newModel);
+      newModelInstance.parent = this
+      this.all.unshift(newModelInstance);
+    }
+  }
+
   @action deleteItem(item) {
     const index = this.all.indexOf(item);
     if (index > -1) {

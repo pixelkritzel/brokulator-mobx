@@ -6,14 +6,19 @@ import TransactionForm from './transactions-form';
 
 import store from '../../store';
 
+function addTransaction() {
+  store.transactions.addAtBegin({ _editMode: true});
+}
 
 @observer
 export default class TransactionsList extends React.Component<{}, {}> {
   render() {
-    console.log(store.transactions)
     return(
       <section>
         <h2>TransactionsList</h2>
+        <button className="btn btn-success" onClick={() => addTransaction()}>
+          Add transaction
+        </button> 
         <ul className="list-unstyled">
           { store.transactions.all.map( transaction => 
             <li key={transaction.cid}>
