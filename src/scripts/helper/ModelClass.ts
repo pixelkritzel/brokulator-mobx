@@ -7,15 +7,13 @@ import CollectionClass from './CollectionClass'
 export default class ModelClass {
   
   cid: number
-
   parent: CollectionClass
 
   @action update(data) {
     assign(this, data);
-    console.log(this)
   }
 
-  @action delete(account) {
+  @action delete() {
     this.parent.deleteItem(this);
   } 
   

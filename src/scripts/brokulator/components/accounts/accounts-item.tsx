@@ -21,18 +21,18 @@ function updateAccountBalance(account: AccountModel<AccountData>) {
 };
 
 function enterEditMode(account: AccountModel<AccountData>) {
-  account.setEditMode(true);
+  account.update({_editMode: true});
 }
 
 function deleteAccount(account: AccountModel<AccountData>) {
-  account.delete(account);
+  account.delete();
 }
 
 @observer
 class AccountItem extends React.Component<{ account: AccountModel<AccountData> }, {}> {
   render() {
     const { account } = this.props;
-    return (<li key={account.cid}>
+    return (<div>
       <dl className="row">
         <dt className="col-sm-3">Name</dt>
         <dd className="col-sm-9" onDoubleClick={() => updateAccountName(account)}>{account.name}</dd>
@@ -47,7 +47,7 @@ class AccountItem extends React.Component<{ account: AccountModel<AccountData> }
           <i className="fa fa-times" aria-hidden="true"></i>{" "}Delete
         </button>
       </div>
-    </li>)
+    </div>)
   }
 }
 

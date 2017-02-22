@@ -1,24 +1,20 @@
-import { action, observable } from 'mobx';
+import { observable } from 'mobx';
 
 import ModelClass from '../../helper/ModelClass';
 
 export interface AccountData {
   name: string,
-  balance: Number
+  balance: number
 }
 
 export interface AccountModelInterface extends ModelClass{
   name: string,
   balance: number,
-  editMode: boolean
+  _editMode: boolean
 }
 
 export default class AccountModel<AccountData> extends ModelClass {
   @observable name
   @observable balance
   @observable _editMode
-
-  @action setEditMode(yesNo: Boolean) {
-    this._editMode = yesNo;
-  }
 }

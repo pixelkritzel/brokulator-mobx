@@ -6,15 +6,17 @@ import { AccountData } from '../../models/AccountModel';
 
 function updateAccount(account: AccountModel<AccountData>, target) {
   const { name, value } = target;
-  account.update({ name: value });
+  const updateData = {};
+  updateData[name] = value;
+  account.update(updateData);
 }
 
 function leaveEditMode(account: AccountModel<AccountData>) {
-  account.setEditMode(false);
+  account.update({ _editMode: false });
 }
 
 function deleteAccount(account: AccountModel<AccountData>) {
-  account.delete(account);
+  account.delete();
 }
 
 @observer
@@ -31,7 +33,7 @@ export default class AccountForm extends React.Component<{ account: AccountModel
           <label htmlFor="accountBalance_{account.cid}">Account balance</label>
           <input type="number" className="form-control" id="accountBalance_{account.cid}" placeholder="0" name="balance" defaultValue={account.balance} />
         </div>
-        <div className="btn-group" role="group" aria-label="Basic example">
+        <div className="btn-group" role="group">
           <button type="button" className="btn btn-primary" onClick={() => leaveEditMode(account)}>
             <i className="fa fa-pencil" aria-hidden="true"></i>{" "}Done
           </button>
