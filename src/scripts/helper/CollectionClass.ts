@@ -28,7 +28,7 @@ export default class Collection {
     }
   }
 
-  @action addFirst = (newModel) => {
+  @action addAtBegin = (newModel) => {
     if (Array.isArray(newModel)) {
       newModel.forEach(item => this.add(item));
       return;
